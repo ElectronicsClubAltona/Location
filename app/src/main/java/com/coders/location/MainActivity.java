@@ -1,5 +1,6 @@
 package com.coders.location;
-
+// 4 November 2020
+// TODO extract useful GPS routines for repeater project
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             stringBuilder.append(wayLatitude);
                             stringBuilder.append("-");
+                            stringBuilder.append(":");
                             stringBuilder.append(wayLongitude);
                             stringBuilder.append("\n\n");
                             txtContinueLocation.setText(stringBuilder.toString());
@@ -111,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getLocation() {
-        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)   != PackageManager.PERMISSION_GRANTED
+         && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+             ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                     AppConstants.LOCATION_REQUEST);
 
         } else {
