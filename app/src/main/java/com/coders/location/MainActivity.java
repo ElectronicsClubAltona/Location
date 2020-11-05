@@ -30,9 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private double wayLatitude = 0.0, wayLongitude = 0.0;
     private LocationRequest locationRequest;
     private LocationCallback locationCallback;
-    private android.widget.Button btnLocation;
     private TextView txtLocation;
-    private android.widget.Button btnContinueLocation;
     private TextView txtContinueLocation;
     private StringBuilder stringBuilder;
 
@@ -44,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.txtContinueLocation = (TextView) findViewById(R.id.txtContinueLocation);
-        this.btnContinueLocation = (Button) findViewById(R.id.btnContinueLocation);
+        Button btnContinueLocation = (Button) findViewById(R.id.btnContinueLocation);
         this.txtLocation = (TextView) findViewById(R.id.txtLocation);
-        this.btnLocation = (Button) findViewById(R.id.btnLocation);
+        Button btnLocation = (Button) findViewById(R.id.btnLocation);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -55,12 +53,9 @@ public class MainActivity extends AppCompatActivity {
         locationRequest.setInterval(10 * 1000); // 10 seconds
         locationRequest.setFastestInterval(5 * 1000); // 5 seconds
 
-        new GpsUtils(this).turnGPSOn(new GpsUtils.onGpsListener() {
-            @Override
-            public void gpsStatus(boolean isGPSEnable) {
-                // turn on GPS
-                isGPS = isGPSEnable;
-            }
+        new GpsUtils(this).turnGPSOn(isGPSEnable -> {
+            // turn on GPS
+            isGPS = isGPSEnable;
         });
 
         locationCallback = new LocationCallback() {
